@@ -67,15 +67,27 @@
             inset: -1px;
             border-radius: inherit;
             padding: 1px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            background: conic-gradient(from var(--angle, 0deg), #6366f1, #8b5cf6, #ec4899, #6366f1);
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
-            opacity: 0.55;
+            opacity: 0.7;
+            transition: opacity 200ms ease;
+            animation: rotate-border 6s linear infinite;
+        }
+        .card-modern::after {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: inherit;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.25);
+            pointer-events: none;
+            opacity: .0;
             transition: opacity 200ms ease;
         }
         .card-modern:hover::before { opacity: 1; }
+        .card-modern:hover::after { opacity: .9; }
         body.bg-light { 
             background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.12), rgba(255,255,255,0) 60%), 
                         radial-gradient(800px 400px at 110% 10%, rgba(236,72,153,.12), rgba(255,255,255,0) 60%);
@@ -95,6 +107,11 @@
                 transform: translateY(0);
                 opacity: 1;
             }
+        }
+
+        @@keyframes rotate-border {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
         }
     </style>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
