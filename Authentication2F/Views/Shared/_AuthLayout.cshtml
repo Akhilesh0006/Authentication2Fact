@@ -27,6 +27,39 @@
             transform: translateY(0);
             box-shadow: 0 8px 18px rgba(99, 102, 241, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
         }
+
+        /* Modern auth card with gradient border + hover shadow */
+        .card-modern {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 1rem;
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
+            transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+            overflow: hidden;
+        }
+        .card-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 38px rgba(0, 0, 0, 0.12), 0 10px 16px rgba(99, 102, 241, 0.18);
+            border-color: transparent;
+        }
+        .card-modern::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.55;
+            transition: opacity 200ms ease;
+        }
+        .card-modern:hover::before { opacity: 1; }
+        body.bg-light { background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.08), rgba(255,255,255,0) 60%), radial-gradient(800px 400px at 110% 10%, rgba(236,72,153,.08), rgba(255,255,255,0) 60%); }
+        .form-control:focus { box-shadow: 0 0 0 .2rem rgba(99,102,241,.15); border-color: #8b5cf6; }
     </style>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
