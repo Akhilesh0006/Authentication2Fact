@@ -11,36 +11,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         .btn-gradient {
-            background-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            --g1: #6366f1;
+            --g2: #8b5cf6;
+            --g3: #ec4899;
             color: #fff;
             border: none;
+            background-image: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
+            background-size: 300% 300%;
+            animation: gradient-move 6s ease infinite;
             box-shadow: 0 8px 18px rgba(99, 102, 241, 0.35), 0 2px 6px rgba(0, 0, 0, 0.08);
-            transform: translateZ(0);
+            transform: translateZ(0) scale(1);
             transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
         }
         .btn-gradient:hover {
-            filter: brightness(1.03);
-            transform: translateY(-2px);
-            box-shadow: 0 14px 28px rgba(99, 102, 241, 0.4), 0 10px 18px rgba(0, 0, 0, 0.12);
+            filter: brightness(1.05);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(99, 102, 241, 0.42), 0 10px 18px rgba(0, 0, 0, 0.12);
         }
         .btn-gradient:active {
             transform: translateY(0);
             box-shadow: 0 8px 18px rgba(99, 102, 241, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
         }
 
-        /* Modern auth card with gradient border + hover shadow */
+        @@keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @@media (prefers-reduced-motion: reduce) {
+            .btn-gradient { animation: none; background-size: 100% 100%; }
+        }
+
+        /* Modern auth card with blur + luxury rounded corners */
         .card-modern {
             position: relative;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 1rem;
-            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05);
             transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
             overflow: hidden;
+            animation: topDown 1.2s ease-out;
         }
         .card-modern:hover {
             transform: translateY(-4px);
-            box-shadow: 0 22px 38px rgba(0, 0, 0, 0.12), 0 10px 16px rgba(99, 102, 241, 0.18);
+            box-shadow: 0 32px 60px rgba(0, 0, 0, 0.15), 0 16px 32px rgba(99, 102, 241, 0.2);
             border-color: transparent;
         }
         .card-modern::before {
@@ -58,8 +76,26 @@
             transition: opacity 200ms ease;
         }
         .card-modern:hover::before { opacity: 1; }
-        body.bg-light { background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.08), rgba(255,255,255,0) 60%), radial-gradient(800px 400px at 110% 10%, rgba(236,72,153,.08), rgba(255,255,255,0) 60%); }
+        body.bg-light { 
+            background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.12), rgba(255,255,255,0) 60%), 
+                        radial-gradient(800px 400px at 110% 10%, rgba(236,72,153,.12), rgba(255,255,255,0) 60%);
+        }
         .form-control:focus { box-shadow: 0 0 0 .2rem rgba(99,102,241,.15); border-color: #8b5cf6; }
+
+        @@keyframes topDown {
+            0% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
